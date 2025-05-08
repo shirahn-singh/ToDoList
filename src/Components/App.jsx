@@ -4,11 +4,7 @@ import ToDoList from './ToDoList';
 import React, {useState} from 'react';
 
 function App() {
-
-  const [taskList, setTaskList] = useState([
-    { id: 1, text: "This is task 1", completed: false },
-    { id: 2, text: "This is task 2", completed: false }
-]);
+  const [taskList, setTaskList] = useState([]);
 
 function deleteTask(idToDelete) {
   setTaskList(prev => prev.filter(task => task.id !== idToDelete));
@@ -22,7 +18,9 @@ setTaskList((prev)=>[...prev, task]);
     <>
       <h1>Hello, I am a to do list. Add stuff to me now.</h1>
       <AddItem updateTaskList={addNewTask} />
-      <ToDoList items={taskList} DeleteItem={deleteTask}/>
+      {taskList.length === 0
+    ? <div>No tasks yet! Add some</div>
+    : <ToDoList items={taskList} DeleteItem={deleteTask}/> }
     </>
   )
 }
