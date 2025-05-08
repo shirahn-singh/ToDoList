@@ -1,14 +1,27 @@
 .toDoListItem {
     display: flex;
-    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
-    gap: 80px;
-}
-
-.toDoListItemCompleted {
+    padding: 10px;
+    border-bottom: 1px solid #444;
+    background-color: #222;
+    color: white;
+    gap: 20px; 
+  }
+  
+  .toDoListItemCompleted {
+    color: darkblue;
+    text-decoration: line-through;
+  }
+  
+  .taskText {
+    flex: 1;
+    max-width: 300px;
+    word-break: break-word;
+  }
+  
+  .buttonGroup {
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 80px;
-    color: green;
-}
+    gap: 10px;
+  }
+  
