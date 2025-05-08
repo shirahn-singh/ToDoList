@@ -1,0 +1,14 @@
+.toDoListItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 80px;
+}
+
+.toDoListItemCompleted {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 80px;
+    color: green;
+}

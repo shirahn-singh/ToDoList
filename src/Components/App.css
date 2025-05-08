@@ -40,20 +40,3 @@
 .read-the-docs {
   color: #888;
 }
-
-.to-do-list-item{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 80px;
-}
-.to-do-list-item-completed{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 80px;
-  color: green;
-}
-.items{
-  width: 500px;
-}
