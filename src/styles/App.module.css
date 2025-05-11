@@ -6,3 +6,7 @@
     justify-content: center;
     flex-direction: column;
 }
+
+.noTasksYet{
+    font-size: 20px;
+}

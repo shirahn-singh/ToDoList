@@ -29,7 +29,7 @@ function App() {
       <h1>Hello, I am a to do list. Add stuff to me now.</h1>
       <AddItem updateTaskList={addNewTask} />
       {taskList.length === 0
-        ? <div>No tasks yet! Add some</div>
+        ? <div className = {styles.noTasksYet}>No tasks yet! Add some</div>
         : <ToDoList items={taskList} DeleteItem={deleteTask} ToggleComplete = {toggleTaskComplete} />}
     </div>
   )
