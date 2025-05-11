@@ -1,0 +1,19 @@
+.addItem{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    padding-bottom: 1rem;
+}
+
+.inputBox{
+border-radius: 0;
+width: 50%;
+}
+
+.addButton{
+    background-color: darkgray;
+    color: white;
+    border-radius: 0;
+    width: 50%;
+}

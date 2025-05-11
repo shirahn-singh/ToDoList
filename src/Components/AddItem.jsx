@@ -23,7 +23,7 @@ function AddItem({updateTaskList}) {
     return (
         <div className={styles.addItem}>
             <input className = {styles.inputBox}onChange={(e) => { setCurrentTask(e.target.value) }} value={task}></input>
-            <button className = {styles.addButton} onClick={addToList} disabled={task.length == 0}> Add to list</button>
+            <button className = {styles.addButton} onClick={addToList} disabled={task.length == 0}> Add</button>
         </div>
     );
 }
