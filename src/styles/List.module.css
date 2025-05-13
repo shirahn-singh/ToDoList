@@ -1,7 +1,5 @@
 .accordionSection {
     margin-bottom: 1rem;
-    border: 1px solid #aaa;
-    border-radius: 6px;
     overflow: hidden;
   }
   
@@ -11,7 +9,6 @@
     font-weight: bold;
     text-align: left;
     background-color: #2e2e2e;
-    color: #fff;
     border: none;
     cursor: pointer;
   }

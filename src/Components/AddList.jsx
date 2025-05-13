@@ -12,6 +12,7 @@ function AddList({updateTaskLists}){
             completed: false,
             tasks: []
            })
+           setCurrentList("");
         }
         else {
             alert("Please type something before adding");
