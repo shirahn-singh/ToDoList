@@ -1,38 +1,76 @@
-import './App.css'
+import './App.css';
 import React, { useState } from 'react';
 import List from './List';
 import AddList from './AddList';
 import styles from '../styles/App.module.css';
-function App() {
-  const [lists, setTaskLists] = useState([]);
 
-  function deleteList(idToDelete) {
-    setTaskLists(prev => prev.filter(task => task.id !== idToDelete));
+function App() {
+  const [listGroup, setListGroup] = useState([
+    {
+      id: 1,
+      text: "Groceries",
+      completed: false,
+      tasks: [{ id: 101, text: "Buy eggs", completed: false }]
+    }
+  ]);
+
+  function addNewListGroup(task) {
+    setListGroup((prev) => [...prev, task]);
   }
 
-  function toggleTaskComplete(idToToggle) {
-    setTaskLists(prev =>
-      prev.map(task =>
-        task.id === idToToggle
-          ? { ...task, completed: !task.completed }
-          : task
+  function addTaskToList(listId, task) {
+    setListGroup(prev =>
+      prev.map(list =>
+        list.id === listId
+          ? { ...list, tasks: [...list.tasks, task] }
+          : list
       )
     );
   }
 
-  function addNewTaskList(task) {
-    setTaskLists((prev) => [...prev, task]);
+  function deleteTaskFromList(listId, taskId) {
+    setListGroup(prev =>
+      prev.map(list =>
+        list.id === listId
+          ? { ...list, tasks: list.tasks.filter(task => task.id !== taskId) }
+          : list
+      )
+    );
   }
 
-  return(
-     <div className={styles.card}>
-          <h1>Hello, I am a to do list. Add stuff to me now</h1>
-          <AddList updateTaskLists={addNewTaskList}/>
-          {lists.length === 0
-            ? <div className = {styles.noTasksYet}>No tasks yet! Add some</div>
-            : <List items={lists} DeleteItem={deleteList} ToggleComplete = {toggleTaskComplete} />}
-        </div>
+  function toggleTaskCompleteInList(listId, taskId) {
+    setListGroup(prev =>
+      prev.map(list =>
+        list.id === listId
+          ? {
+              ...list,
+              tasks: list.tasks.map(task =>
+                task.id === taskId
+                  ? { ...task, completed: !task.completed }
+                  : task
+              )
+            }
+          : list
+      )
+    );
+  }
+
+  return (
+    <div className={styles.card}>
+      <h1>Hello, I am a to do list. Add stuff to me now</h1>
+      <AddList updateTaskLists={addNewListGroup} />
+      {listGroup.length === 0 ? (
+        <div className={styles.noTasksYet}>No tasks yet! Add some</div>
+      ) : (
+        <List
+          items={listGroup}
+          addTaskToList={addTaskToList}
+          deleteTask={deleteTaskFromList}
+          toggleTaskComplete={toggleTaskCompleteInList}
+        />
+      )}
+    </div>
   );
 }
 
-export default App
+export default App;
