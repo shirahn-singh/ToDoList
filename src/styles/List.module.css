@@ -1,0 +1,27 @@
+.accordionSection {
+    margin-bottom: 1rem;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  
+  .accordionToggle {
+    width: 100%;
+    padding: 1rem;
+    font-weight: bold;
+    text-align: left;
+    background-color: #2e2e2e;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .accordionToggle:hover {
+    background-color: #444;
+  }
+  
+  .accordionContent {
+    padding: 1rem;
+    background-color: #3d3d3d;
+  }
+  
