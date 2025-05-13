@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import AddItem from './AddItem';
 import ToDoList from './ToDoList';
 import styles from "../styles/App.module.css";
-import listStyles from "../styles/List.module.css"; // 👈 custom accordion styles
+import listStyles from "../styles/List.module.css"; 
 
 function List({ items, addTaskToList, deleteTask, toggleTaskComplete }) {
   const [openListId, setOpenListId] = useState(null);
