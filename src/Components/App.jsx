@@ -14,6 +14,26 @@ function App() {
     }
   ]);
 
+  async function generateListFromTitle(listTitle) {
+    const response = await fetch('http://localhost:5000/api/generate-tasks', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ listTitle }),
+    });
+  
+    if (!response.ok) {
+      console.error('Failed to generate list');
+      return null;
+    }
+  
+    const newList = await response.json();
+
+    addNewListGroup(newList);
+    //return newList;
+  }
+  
   function addNewListGroup(task) {
     setListGroup((prev) => [...prev, task]);
   }
@@ -58,7 +78,8 @@ function App() {
   return (
     <div className={styles.card}>
       <h1>Hello, I am a to do list. Add stuff to me now</h1>
-      <AddList updateTaskLists={addNewListGroup} />
+      <AddList updateTaskLists={addNewListGroup} buttonText = "Add List" useAi={false} />
+      <AddList updateTaskLists={generateListFromTitle} buttonText = "Use AI to make list" useAi={true}/>
       {listGroup.length === 0 ? (
         <div className={styles.noTasksYet}>No tasks yet! Add some</div>
       ) : (
