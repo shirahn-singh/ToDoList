@@ -5,14 +5,7 @@ import AddList from './AddList';
 import styles from '../styles/App.module.css';
 
 function App() {
-  const [listGroup, setListGroup] = useState([
-    {
-      id: 1,
-      text: "Groceries",
-      completed: false,
-      tasks: [{ id: 101, text: "Buy eggs", completed: false }]
-    }
-  ]);
+  const [listGroup, setListGroup] = useState([]);
 
   async function generateListFromTitle(listTitle) {
     const response = await fetch('http://localhost:5000/api/generate-tasks', {
@@ -31,7 +24,6 @@ function App() {
     const newList = await response.json();
 
     addNewListGroup(newList);
-    //return newList;
   }
   
   function addNewListGroup(task) {
@@ -75,6 +67,15 @@ function App() {
     );
   }
 
+  function toggleListComplete(listId){
+    setListGroup((prev)=>prev.map(listItem =>
+      listId == listItem.id ? {
+        ...listItem,
+        completed: !listItem.completed
+      }:listItem
+    ));
+  }
+
   return (
     <div className={styles.card}>
       <h1>Hello, I am a to do list. Add stuff to me now</h1>
@@ -88,6 +89,7 @@ function App() {
           addTaskToList={addTaskToList}
           deleteTask={deleteTaskFromList}
           toggleTaskComplete={toggleTaskCompleteInList}
+          toggleListComplete={toggleListComplete}
         />
       )}
     </div>

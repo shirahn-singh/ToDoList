@@ -3,8 +3,17 @@
     overflow: hidden;
   }
   
-  .accordionToggle {
+  .accordionHeader{
     width: 100%;
+    font-weight: bold;
+    text-align: left;
+    background-color: #2e2e2e;
+    border: none;
+    cursor: default;
+  }
+  
+  .accordionToggle {
+    width: 50%;
     padding: 1rem;
     font-weight: bold;
     text-align: left;
@@ -21,4 +30,11 @@
     padding: 1rem;
     background-color: #3d3d3d;
   }
+
+
+  .listCompleted {
+    color: darkgrey;
+    text-decoration: line-through;
+  }
+  
   
