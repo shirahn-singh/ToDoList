@@ -15,15 +15,13 @@ function List({ items, addTaskToList, deleteTask, toggleTaskComplete, toggleList
     <div>
       {items.map((list) => {
         return (
-          <div key={list.id} className={`${listStyles.accordionSection} ${list.completed ? listStyles.listCompleted : ''} `}>
+          <div key={list.id} className={`${listStyles.accordionSection}`}>
             <div className={listStyles.accordionHeader}>
-              <button
-                className={`${listStyles.accordionToggle} ${list.completed ? listStyles.listCompleted : ''}`}
-                onClick={() => toggleAccordion(list.id)}
-              >
-                {list.text}
+              <button className={listStyles.accordionToggle} onClick={() => toggleAccordion(list.id)}>
+                <span className={list.completed ? listStyles.listCompleted : ''}>
+                  {list.text}
+                </span>
               </button>
-
               <button
                 className={`${styles.taskText} `}
                 onClick={() => toggleListComplete(list.id)}>
