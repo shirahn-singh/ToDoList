@@ -88,6 +88,12 @@ function App() {
     ));
   }
 
+  function deleteList(listId){
+    setListGroup(prev =>
+      prev.filter(listItem => listItem.id !== listId)
+    );
+  }
+
   return (
     <div className={styles.card}>
       <h1>Hello, I am a to do list. Add stuff to me now</h1>
@@ -102,6 +108,7 @@ function App() {
           deleteTask={deleteTaskFromList}
           toggleTaskComplete={toggleTaskCompleteInList}
           toggleListComplete={toggleListComplete}
+          deleteList={deleteList}
         />
       )}
     </div>

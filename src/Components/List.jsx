@@ -4,7 +4,7 @@ import ToDoList from './ToDoList';
 import styles from "../styles/App.module.css";
 import listStyles from "../styles/List.module.css";
 
-function List({ items, addTaskToList, deleteTask, toggleTaskComplete, toggleListComplete }) {
+function List({ items, addTaskToList, deleteTask, toggleTaskComplete, toggleListComplete, deleteList }) {
   const [openListId, setOpenListId] = useState(null);
 
   const toggleAccordion = (id) => {
@@ -26,6 +26,11 @@ function List({ items, addTaskToList, deleteTask, toggleTaskComplete, toggleList
                 className={`${styles.taskText} `}
                 onClick={() => toggleListComplete(list.id)}>
                 Done
+              </button>
+              <button
+                className={`${styles.taskText} `}
+                onClick={() => deleteList(list.id)}>
+                Delete
               </button>
             </div>
             <div>
