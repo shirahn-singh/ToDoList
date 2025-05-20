@@ -82,7 +82,7 @@ function App() {
         completed: !listItem.completed,
         tasks: listItem.tasks.map((task) =>({
           ...task,
-          completed: !task.completed? true : task.completed 
+          completed: !listItem.completed
         }))
       }:listItem
     ));
