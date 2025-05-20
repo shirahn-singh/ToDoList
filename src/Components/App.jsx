@@ -5,7 +5,15 @@ import AddList from './AddList';
 import styles from '../styles/App.module.css';
 
 function App() {
-  const [listGroup, setListGroup] = useState([]);
+  const [listGroup, setListGroup] = useState([
+    {
+      id: 1,
+      text: "Groceries",
+      completed: false,
+      tasks: [{ id: 101, text: "Buy eggs", completed: false }]
+    }
+  ]);
+
 
   async function generateListFromTitle(listTitle) {
     const response = await fetch('http://localhost:5000/api/generate-tasks', {
@@ -71,7 +79,11 @@ function App() {
     setListGroup((prev)=>prev.map(listItem =>
       listId == listItem.id ? {
         ...listItem,
-        completed: !listItem.completed
+        completed: !listItem.completed,
+        tasks: listItem.tasks.map((task) =>({
+          ...task,
+          completed: !task.completed? true : task.completed 
+        }))
       }:listItem
     ));
   }
