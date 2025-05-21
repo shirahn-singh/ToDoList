@@ -10,7 +10,10 @@ function App() {
       id: 1,
       text: "Groceries",
       completed: false,
-      tasks: [{ id: 101, text: "Buy eggs", completed: false }]
+      tasks: [{ id: 101, text: "Buy eggs", completed: false },
+        { id: 1045, text: "Buy milk", completed: false },
+        { id: 1011, text: "Buy flowers", completed: false }
+      ]
     }
   ]);
 
@@ -73,7 +76,30 @@ function App() {
           : list
       )
     );
+
+    moveToEnd(listId, taskId);
   }
+
+  function moveToEnd(listId, taskId){
+    
+    setListGroup(prev=>
+      prev.map(list=>{
+        if(list.id !== list.id){
+          return list;
+        }
+
+        const taskToMove = list.tasks.find(task=>(task.id===taskId));
+        const remainingTasks = list.tasks.filter((task)=>(task.id!==taskId));
+
+        return{
+          ...list,
+          tasks: [...remainingTasks, taskToMove]
+        };
+
+      })
+    )
+  }
+  
 
   function toggleListComplete(listId){
     setListGroup((prev)=>prev.map(listItem =>
