@@ -91,6 +91,9 @@ function App() {
         const taskToMove = list.tasks.find(task=>(task.id===taskId));
         const remainingTasks = list.tasks.filter((task)=>(task.id!==taskId));
 
+        if(!taskToMove.completed){
+          return list;
+        }
         return{
           ...list,
           tasks: [...remainingTasks, taskToMove]
