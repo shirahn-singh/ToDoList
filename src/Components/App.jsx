@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import List from './List';
 import AddList from './AddList';
 import styles from '../styles/App.module.css';
@@ -16,6 +16,17 @@ function App() {
       ]
     }
   ]);
+  useEffect(() => {
+    localStorage.setItem('listGroupData', JSON.stringify(listGroup));
+  }, [listGroup]);
+
+  useEffect(() => {
+    const stored = localStorage.getItem('listGroupData');
+    if (stored) {
+      setListGroup(JSON.parse(stored));
+    }
+  }, []);
+  
 
 
   async function generateListFromTitle(listTitle) {
