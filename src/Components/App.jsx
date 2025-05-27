@@ -6,18 +6,20 @@ import styles from '../styles/App.module.css';
 
 function App() {
   const [listGroup, setListGroup] = useState([]);
-  useEffect(() => {
-    localStorage.setItem('listGroupData', JSON.stringify(listGroup));
-  }, [listGroup]);
-
+  const [hasLoaded, setHasLoaded] = useState(false);
   useEffect(() => {
     const stored = localStorage.getItem('listGroupData');
     if (stored) {
       setListGroup(JSON.parse(stored));
     }
+    setHasLoaded(true);
   }, []);
   
-
+  useEffect(() => {
+    if (hasLoaded) {
+      localStorage.setItem('listGroupData', JSON.stringify(listGroup));
+    }
+  }, [listGroup, hasLoaded]);
 
   async function generateListFromTitle(listTitle) {
     const response = await fetch('http://localhost:5000/api/generate-tasks', {
