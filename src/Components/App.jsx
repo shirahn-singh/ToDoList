@@ -5,17 +5,7 @@ import AddList from './AddList';
 import styles from '../styles/App.module.css';
 
 function App() {
-  const [listGroup, setListGroup] = useState([
-    {
-      id: 1,
-      text: "Groceries",
-      completed: false,
-      tasks: [{ id: 101, text: "Buy eggs", completed: false },
-        { id: 1045, text: "Buy milk", completed: false },
-        { id: 1011, text: "Buy flowers", completed: false }
-      ]
-    }
-  ]);
+  const [listGroup, setListGroup] = useState([]);
   useEffect(() => {
     localStorage.setItem('listGroupData', JSON.stringify(listGroup));
   }, [listGroup]);
@@ -95,16 +85,21 @@ function App() {
     
     setListGroup(prev=>
       prev.map(list=>{
-        if(list.id !== list.id){
+        if(list.id !== listId){
           return list;
         }
 
-        const taskToMove = list.tasks.find(task=>(task.id===taskId));
-        const remainingTasks = list.tasks.filter((task)=>(task.id!==taskId));
-
-        if(!taskToMove.completed){
+        if(list.tasks.length==0){
           return list;
         }
+
+        const taskToMove = list.tasks.find(task => task?.id === taskId);
+
+        if (!taskToMove || !taskToMove.completed) {
+          return list;
+        }
+
+        const remainingTasks = list.tasks.filter((task)=>(task?.id!==taskId));
         return{
           ...list,
           tasks: [...remainingTasks, taskToMove]
