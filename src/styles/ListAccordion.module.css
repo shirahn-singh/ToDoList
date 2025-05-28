@@ -1,3 +1,11 @@
+.buttonWrapper{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+    padding-right: 2rem;
+    width: 50%;
+}
 .accordionSection {
     margin-bottom: 1rem;
     overflow: hidden;
@@ -16,7 +24,7 @@
   }
   
   .accordionToggle {
-    width: 50%;
+    width: 90%;
     padding: 1rem;
     font-weight: bold;
     text-align: left;
@@ -40,4 +48,6 @@
     text-decoration: line-through;
   }
   
-  
+  .listButton{
+    height: fit-content;
+  }

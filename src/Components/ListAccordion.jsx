@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import AddItem from './AddItem';
 import ToDoList from './ToDoList';
-import styles from "../styles/App.module.css";
-import listStyles from "../styles/List.module.css";
+import listStyles from "../styles/ListAccordion.module.css";
 
 function ListAccordion({ list, addTaskToList, deleteTask, toggleTaskComplete, toggleListComplete, deleteList }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,15 +16,17 @@ function ListAccordion({ list, addTaskToList, deleteTask, toggleTaskComplete, to
             {list.text}
           </span>
         </button>
-        <button className={styles.taskText} onClick={() => toggleListComplete(list.id)}>Done</button>
-        <button className={styles.taskText} onClick={() => deleteList(list.id)}>Delete</button>
+        <div className={listStyles.buttonWrapper}>
+        <button className={listStyles.listButton} onClick={() => toggleListComplete(list.id)}>Done</button>
+        <button className={listStyles.listButton} onClick={() => deleteList(list.id)}>Delete</button>
+        </div>
       </div>
 
       {isOpen && (
         <div className={listStyles.accordionContent}>
           <AddItem updateTaskList={task => addTaskToList(list.id, task)} />
           {list.tasks.length === 0 ? (
-            <div className={styles.noTasksYet}>No tasks yet! Add some</div>
+            <div className={listStyles.noTasksYet}>No tasks yet! Add some</div>
           ) : (
             <ToDoList
               items={list.tasks}

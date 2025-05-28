@@ -20,7 +20,7 @@ width: 50%;
 
 .buttonWrapper{
     display: flex;
-    justify-content: space-ar;
+    justify-content: space-around;
     gap: 1rem;
     width: 50%;
 }
