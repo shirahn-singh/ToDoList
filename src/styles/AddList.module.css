@@ -2,7 +2,7 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    gap: 0;
+    gap: 1rem;
     padding-bottom: 1rem;
 }
 
@@ -15,5 +15,12 @@ width: 50%;
     background-color: darkgray;
     color: white;
     border-radius: 0;
+    width:100%;
+}
+
+.buttonWrapper{
+    display: flex;
+    justify-content: space-ar;
+    gap: 1rem;
     width: 50%;
 }

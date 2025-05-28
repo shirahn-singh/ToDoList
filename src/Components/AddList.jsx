@@ -36,8 +36,10 @@ function AddList({ addNewListGroup, generateListFromTitle }) {
   return (
     <div className={styles.addItem}>
       <input className={styles.inputBox} onChange={(e) => { setCurrentList(e.target.value) }} value={list}></input>
-      <button className={styles.addButton} onClick={() => { addToList(false) }} disabled={list.length == 0}> Create List</button>
-      <button className={styles.addButton} onClick={() => { addToList(true) }} disabled={list.length == 0}> CreAIte my list</button>
+      <div className={styles.buttonWrapper}>
+        <button className={styles.addButton} onClick={() => { addToList(false) }} disabled={list.length == 0}> Create List</button>
+        <button className={styles.addButton} onClick={() => { addToList(true) }} disabled={list.length == 0}> CreAIte my list</button>
+      </div>
     </div>
   );
 }
