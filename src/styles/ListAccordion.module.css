@@ -4,7 +4,7 @@
     align-items: center;
     gap: 1rem;
     padding-right: 2rem;
-    width: 50%;
+    width: 20%;
 }
 .accordionSection {
     margin-bottom: 1rem;
@@ -24,7 +24,7 @@
   }
   
   .accordionToggle {
-    width: 90%;
+    width: 100%;
     padding: 1rem;
     font-weight: bold;
     text-align: left;
