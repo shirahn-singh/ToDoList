@@ -110,7 +110,6 @@ function App() {
       })
     )
   }
-  
 
   function toggleListComplete(listId){
     setListGroup((prev)=>prev.map(listItem =>
@@ -134,8 +133,7 @@ function App() {
   return (
     <div className={styles.card}>
       <h1>Hello, I am a to do list. Add stuff to me now</h1>
-      <AddList updateTaskLists={addNewListGroup} buttonText = "Add List" useAi={false} />
-      <AddList updateTaskLists={generateListFromTitle} buttonText = "Use AI to make list" useAi={true}/>
+      <AddList addNewListGroup={addNewListGroup} generateListFromTitle = {generateListFromTitle} />
       {listGroup.length === 0 ? (
         <div className={styles.noTasksYet}>No tasks yet! Add some</div>
       ) : (
