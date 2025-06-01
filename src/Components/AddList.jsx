@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styles from '../styles/AddList.module.css';
+import { TextField, Button, Stack } from '@mui/material';
 
 function AddList({ addNewListGroup, generateListFromTitle }) {
   const [list, setCurrentList] = useState("");
@@ -34,13 +35,34 @@ function AddList({ addNewListGroup, generateListFromTitle }) {
   }
 
   return (
-    <div className={styles.addItem}>
-      <input className={styles.inputBox} onChange={(e) => { setCurrentList(e.target.value) }} value={list}></input>
-      <div className={styles.buttonWrapper}>
-        <button className={styles.addButton} onClick={() => { addToList(false) }} disabled={list.length == 0}> Create List</button>
-        <button className={styles.addButton} onClick={() => { addToList(true) }} disabled={list.length == 0}> CreAIte my list</button>
-      </div>
-    </div>
+    <Stack direction="row" spacing={2} sx={{ mt: 2 }}>
+  <TextField
+    label="What do you want to do? "
+    variant="outlined"
+    fullWidth
+    value={list}
+    onChange={(e) => setCurrentList(e.target.value)}
+  />
+
+  <Stack direction="row" spacing={2}>
+    <Button
+      variant="contained"
+      color="primary"
+      onClick={() => addToList(false)}
+      disabled={list.length === 0}
+    >
+      Create List
+    </Button>
+    <Button
+      variant="contained"
+      color="secondary"
+      onClick={() => addToList(true)}
+      disabled={list.length === 0}
+    >
+      CreAIte my list
+    </Button>
+  </Stack>
+</Stack>
   );
 }
 
