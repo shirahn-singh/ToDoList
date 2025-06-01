@@ -38,7 +38,7 @@ function App() {
   }
   
   return (
-    <Container maxWidth="sm" sx={{ mt: 5 }}>
+    <Container maxWidth="xl" minWidth="md">
       <Typography variant="h4" gutterBottom>
         Hello, I am a to-do list. Add stuff to me now
       </Typography>

@@ -19,7 +19,7 @@ function ListAccordion({ list, addTaskToList, deleteTask, toggleTaskComplete, to
 
   return (
     <Accordion expanded={isOpen} onChange={toggleAccordion} sx={{ mb: 2 }}>
-   <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+   <AccordionSummary  expandIcon={<ExpandMoreIcon /> }>
         <Typography
           variant="h6"
           sx={{

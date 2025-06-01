@@ -35,16 +35,17 @@ function AddList({ addNewListGroup, generateListFromTitle }) {
   }
 
   return (
-    <Stack direction="row" spacing={2} sx={{ mt: 2 }}>
+    <Stack direction="row" spacing={2} sx={{ mt: 2 , mb: 2}} className={styles.addSection}>
   <TextField
     label="What do you want to do? "
     variant="outlined"
     fullWidth
     value={list}
     onChange={(e) => setCurrentList(e.target.value)}
+    className={styles.stackChild}
   />
 
-  <Stack direction="row" spacing={2}>
+  <Stack direction="row" spacing={2}  className={styles.stackChild}>
     <Button
       variant="contained"
       color="primary"

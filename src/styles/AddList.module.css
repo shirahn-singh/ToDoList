@@ -24,3 +24,11 @@ width: 50%;
     gap: 1rem;
     width: 50%;
 }
+
+.addSection {
+    width: 100%;
+  }
+  
+  .stackChild {
+    width: 78%;
+  }
