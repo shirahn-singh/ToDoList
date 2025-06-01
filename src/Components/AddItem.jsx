@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import styles from "../styles/AddItem.module.css";
-
+import { TextField, Button, Stack } from '@mui/material';
 
 function AddItem({updateTaskList}) {
     const [task, setCurrentTask] = useState("");
@@ -18,10 +17,24 @@ function AddItem({updateTaskList}) {
     }
 
     return (
-        <div className={styles.addItem}>
-            <input className = {styles.inputBox}onChange={(e) => { setCurrentTask(e.target.value) }} value={task}></input>
-            <button className = {styles.addButton } onClick={addToList} disabled={task.length == 0}> Add</button>
-        </div>
+        <Stack direction="row" spacing={2} alignItems="center">
+        <TextField
+          label="New Task"
+          variant="outlined"
+          fullWidth
+          value={task}
+          onChange={(e) => setCurrentTask(e.target.value)}
+        />
+      
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={addToList}
+          disabled={task.length === 0}
+        >
+          Add
+        </Button>
+      </Stack>
     );
 }
 

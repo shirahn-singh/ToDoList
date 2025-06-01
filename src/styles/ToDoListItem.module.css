@@ -1,25 +1,22 @@
 .toDoListItem {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 1rem;
-    color: white;
-    gap: 20px; 
-  }
-  
-  .toDoListItemCompleted {
-    color: darkgrey;
-    text-decoration: line-through;
-  }
-  
-  .taskText {
-    flex: 1;
-    max-width: 300px;
-    word-break: break-word;
-  }
-  
-  .buttonGroup {
-    display: flex;
-    gap: 10px;
-  }
-  
+  padding: 16px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.taskText {
+  flex-grow: 1;
+}
+
+.toDoListItemCompleted {
+  text-decoration: line-through;
+  color: grey;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 8px;
+}
