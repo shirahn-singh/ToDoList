@@ -4,6 +4,8 @@ import List from './List';
 import AddList from './AddList';
 import styles from '../styles/App.module.css';
 import useListGroup from '../hooks/useListGroup';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
 
 function App() {
   const {
@@ -36,11 +38,17 @@ function App() {
   }
   
   return (
-    <div className={styles.card}>
-      <h1>Hello, I am a to do list. Add stuff to me now</h1>
-      <AddList addNewListGroup={addNewListGroup} generateListFromTitle = {generateListFromTitle} />
+    <Container maxWidth="sm" sx={{ mt: 5 }}>
+      <Typography variant="h4" gutterBottom>
+        Hello, I am a to-do list. Add stuff to me now
+      </Typography>
+  
+      <AddList addNewListGroup={addNewListGroup} generateListFromTitle={generateListFromTitle} />
+  
       {listGroup.length === 0 ? (
-        <div className={styles.noTasksYet}>No tasks yet! Add some</div>
+        <Typography variant="body1" color="text.secondary">
+          No tasks yet! Add some
+        </Typography>
       ) : (
         <List
           items={listGroup}
@@ -51,7 +59,7 @@ function App() {
           deleteList={deleteList}
         />
       )}
-    </div>
+    </Container>
   );
 }
 
