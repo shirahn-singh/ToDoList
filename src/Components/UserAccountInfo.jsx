@@ -1,7 +1,7 @@
-// src/components/UserAccountInfo.jsx
 import { useEffect, useState } from "react";
 import { auth, provider } from "../firebase";
 import { signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
+import { Button, Stack } from "@mui/material";
 
 function UserAccountInfo() {
   const [user, setUser] = useState(null);
@@ -27,12 +27,15 @@ function UserAccountInfo() {
     <div>
       {user ? (
         <div>
-          <img src={user.photoURL} alt="avatar" />
+          <img src={"src/assets/cat.png"} height={30} alt="avatar" />
           <span>{user.displayName}</span>
           <button onClick={handleSignOut}>Logout</button>
         </div>
       ) : (
-        <button onClick={handleSignIn}>Sign in with Google</button>
+        <Stack  direction="row" spacing={1}>
+        <Button variant="contained" onClick={handleSignIn}>Register</Button>
+        <Button variant="contained" onClick={handleSignIn}>Sign in</Button>
+        </Stack>
       )}
     </div>
   );
