@@ -40,7 +40,7 @@ function ListAccordion({ list, addTaskToList, deleteTask, toggleTaskComplete, to
       </AccordionSummary>
   
       <AccordionDetails>
-        <AddItem updateTaskList={task => addTaskToList(list.id, task)} />
+        <AddItem updateTaskList={task => addTaskToList(list.id, task)} listName={list.text} />
         {list.tasks.length === 0 ? (
           <Typography variant="body2" color="text.secondary" sx={{ mt: 2 }}>
             No tasks yet! Add some

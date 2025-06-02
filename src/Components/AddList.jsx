@@ -38,7 +38,7 @@ function AddList({ addNewListGroup, generateListFromTitle }) {
     <Stack direction="row" spacing={2} sx={{ mt: 2 , mb: 2}} className={styles.addSection}>
   <TextField
     label="What do you want to do? "
-    variant="outlined"
+    variant="standard"
     fullWidth
     value={list}
     onChange={(e) => setCurrentList(e.target.value)}

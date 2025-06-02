@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { TextField, Button, Stack } from '@mui/material';
 
-function AddItem({updateTaskList}) {
+function AddItem({updateTaskList, listName}) {
     const [task, setCurrentTask] = useState("");
 
     function addToList() {
@@ -19,8 +19,8 @@ function AddItem({updateTaskList}) {
     return (
         <Stack direction="row" spacing={2} alignItems="center">
         <TextField
-          label="New Task"
-          variant="outlined"
+          label={`New '${listName}' task`}
+          variant="standard"
           fullWidth
           value={task}
           onChange={(e) => setCurrentTask(e.target.value)}
