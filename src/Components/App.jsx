@@ -2,10 +2,11 @@ import './App.css';
 import React, { useState, useEffect } from 'react';
 import List from './List';
 import AddList from './AddList';
-import styles from '../styles/App.module.css';
+import SignIn from './SignIn';
 import useListGroup from '../hooks/useListGroup';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
+import UserAccountInfo from './UserAccountInfo';
 
 function App() {
   const {
@@ -38,6 +39,8 @@ function App() {
   }
   
   return (
+    <>
+    <UserAccountInfo/>
     <Container maxWidth="xl" minWidth="md">
       <Typography variant="h4" gutterBottom>
         Hello, I am a to-do list. Add stuff to me now
@@ -60,6 +63,7 @@ function App() {
         />
       )}
     </Container>
+    </>
   );
 }
 
