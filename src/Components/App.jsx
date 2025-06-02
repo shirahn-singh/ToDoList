@@ -47,7 +47,13 @@ function App() {
       <Typography variant="h4" gutterBottom>
         Hello, I am a to-do list. Add stuff to me now
       </Typography>
-  
+
+        {user && (
+        <Typography variant="h6" color="primary" sx={{ mb: 2 }}>
+          This will be a tab and will be a feed soon
+        </Typography>
+      )}
+
       <AddList addNewListGroup={addNewListGroup} generateListFromTitle={generateListFromTitle} />
   
       {listGroup.length === 0 ? (
