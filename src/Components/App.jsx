@@ -6,6 +6,7 @@ import useListGroup from '../hooks/useListGroup';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import UserAccountInfo from './UserAccountInfo';
+import useFirebaseAuth from '../hooks/useFirebaseAuth';
 
 function App() {
   const {
@@ -17,6 +18,8 @@ function App() {
     toggleListComplete,
     deleteList
   } = useListGroup();
+
+  const { user, login, logout } = useFirebaseAuth();
 
   async function generateListFromTitle(listTitle) {
     const response = await fetch('http://localhost:5000/api/generate-tasks', {
@@ -39,7 +42,7 @@ function App() {
   
   return (
     <>
-    <UserAccountInfo/>
+    <UserAccountInfo user={user} login={login} logout={logout} />
     <Container maxWidth="xl" minWidth="md">
       <Typography variant="h4" gutterBottom>
         Hello, I am a to-do list. Add stuff to me now
