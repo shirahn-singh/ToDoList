@@ -28,6 +28,7 @@ function AuthDialog({ login, signUp, loginWithEmail }) {
             signUp={signUp}
             loginWithEmail={loginWithEmail}
             closeDialog={() => setOpen(false)}
+            dialogOpen = {open}
           />
           <Button
             variant="outlined"
