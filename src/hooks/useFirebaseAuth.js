@@ -1,5 +1,12 @@
 import { useEffect, useState } from "react";
-import { onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
+import {
+    onAuthStateChanged,
+    signInWithPopup,
+    signOut,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword
+  } from "firebase/auth";
+
 import { auth, provider } from "../firebase";
 
 function useFirebaseAuth() {
@@ -13,7 +20,14 @@ function useFirebaseAuth() {
   const login = () => signInWithPopup(auth, provider);
   const logout = () => signOut(auth);
 
-  return { user, login, logout };
+  const signUp = (email, password) =>
+    createUserWithEmailAndPassword(auth, email, password);
+
+  const loginWithEmail = (email, password) =>
+    signInWithEmailAndPassword(auth, email, password);
+
+
+  return { user, login, logout, signUp, loginWithEmail };
 }
 
 export default useFirebaseAuth;
