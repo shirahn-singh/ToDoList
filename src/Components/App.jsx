@@ -1,10 +1,9 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
-import List from './List';
-import AddList from './AddList';
+import UserLists from './UserLists';
+import Feed from './Feed';
 import useListGroup from '../hooks/useListGroup';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
+import { Box, Tab, Tabs, Container, Typography } from '@mui/material';
 import UserAccountInfo from './UserAccountInfo';
 import useFirebaseAuth from '../hooks/useFirebaseAuth';
 
@@ -20,6 +19,8 @@ function App() {
   } = useListGroup();
 
   const { user, login, logout } = useFirebaseAuth();
+  
+  const [tabIndex, setTabIndex] = useState(0);
 
   async function generateListFromTitle(listTitle) {
     const response = await fetch('http://localhost:5000/api/generate-tasks', {
@@ -42,37 +43,43 @@ function App() {
   
   return (
     <>
-    <UserAccountInfo user={user} login={login} logout={logout} />
-    <Container maxWidth="xl" minWidth="md">
-      <Typography variant="h4" gutterBottom>
-        Hello, I am a to-do list. Add stuff to me now
-      </Typography>
-
-        {user && (
-        <Typography variant="h6" color="primary" sx={{ mb: 2 }}>
-          This will be a tab and will be a feed soon
+      <UserAccountInfo user={user} login={login} logout={logout} />
+      <Container maxWidth="xl">
+        <Typography variant="h4" gutterBottom>
+          Hello, I am a to-do list. Add stuff to me now
         </Typography>
-      )}
 
-      <AddList addNewListGroup={addNewListGroup} generateListFromTitle={generateListFromTitle} />
-  
-      {listGroup.length === 0 ? (
-        <Typography variant="body1" color="text.secondary">
-          No tasks yet! Add some
-        </Typography>
-      ) : (
-        <List
-          items={listGroup}
-          addTaskToList={addTaskToList}
-          deleteTask={deleteTaskFromList}
-          toggleTaskComplete={toggleTaskCompleteInList}
-          toggleListComplete={toggleListComplete}
-          deleteList={deleteList}
-        />
-      )}
-    </Container>
+        <Box sx={{ borderBottom: 1, borderColor: 'divider', mb: 2 }}>
+          <Tabs value={tabIndex} onChange={(e, newValue) => setTabIndex(newValue)}>
+            <Tab label="My Lists" />
+            {user && <Tab label="Feed" />}
+          </Tabs>
+        </Box>
+
+        {tabIndex === 0 && (
+          <UserLists
+            listGroup={listGroup}
+            addNewListGroup={addNewListGroup}
+            generateListFromTitle={generateListFromTitle}
+            addTaskToList={addTaskToList}
+            deleteTask={deleteTaskFromList}
+            toggleTaskComplete={toggleTaskCompleteInList}
+            toggleListComplete={toggleListComplete}
+            deleteList={deleteList}
+          />
+        )}
+
+        {tabIndex === 1 && user && <Feed />}
+
+        {tabIndex === 1 && !user && (
+          <Typography variant="body1" color="text.secondary">
+            Please log in to view the feed.
+          </Typography>
+        )}
+      </Container>
     </>
   );
 }
+
 
 export default App;
