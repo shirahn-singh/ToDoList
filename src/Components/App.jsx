@@ -18,8 +18,8 @@ function App() {
     deleteList
   } = useListGroup();
 
-  const { user, login, logout } = useFirebaseAuth();
-  
+  const { user, login, logout, signUp, loginWithEmail } = useFirebaseAuth();
+
   const [tabIndex, setTabIndex] = useState(0);
 
   async function generateListFromTitle(listTitle) {
@@ -30,20 +30,26 @@ function App() {
       },
       body: JSON.stringify({ listTitle }),
     });
-  
+
     if (!response.ok) {
       console.error('Failed to generate list');
       return null;
     }
-  
+
     const newList = await response.json();
 
     addNewListGroup(newList);
   }
-  
+
   return (
     <>
-      <UserAccountInfo user={user} login={login} logout={logout} />
+      <UserAccountInfo
+        user={user}
+        login={login}
+        logout={logout}
+        signUp={signUp}
+        loginWithEmail={loginWithEmail}
+      />
       <Container maxWidth="xl">
         <Typography variant="h4" gutterBottom>
           Hello, I am a to-do list. Add stuff to me now

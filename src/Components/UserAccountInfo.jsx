@@ -1,19 +1,19 @@
-import { Button, Stack } from "@mui/material";
+import { Stack, Button } from "@mui/material";
+import AuthDialog from "./AuthDialog";
 
-function UserAccountInfo({user, login, logout}) {
+function UserAccountInfo({ user, login, logout, signUp, loginWithEmail }) {
   return (
     <div>
       {user ? (
-        <div>
+        <Stack direction="row" spacing={2} alignItems="center">
           <img src={"src/assets/cat.png"} height={30} alt="avatar" />
-          <span>{user.displayName}</span>
-          <button onClick={logout}>Logout</button>
-        </div>
-      ) : (
-        <Stack  direction="row" spacing={1}>
-        <Button variant="contained" onClick={login}>Register</Button>
-        <Button variant="contained" onClick={login}>Sign in</Button>
+          <span>{user.displayName || user.email}</span>
+          <Button variant="outlined" onClick={logout}>
+            Logout
+          </Button>
         </Stack>
+      ) : (
+        <AuthDialog login={login} signUp={signUp} loginWithEmail={loginWithEmail} />
       )}
     </div>
   );
