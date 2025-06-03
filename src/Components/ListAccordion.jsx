@@ -30,10 +30,10 @@ function ListAccordion({ list, addTaskToList, deleteTask, toggleTaskComplete, to
           {list.text}
         </Typography>
         <Stack direction="row" spacing={1}>
-          <Button variant="outlined" color="success" onClick={() => toggleListComplete(list.id)}>
+          <Button component="span" variant="outlined" color="success" onClick={() => toggleListComplete(list.id)}>
             Done
           </Button>
-          <Button variant="outlined" color="error" onClick={() => deleteList(list.id)}>
+          <Button component="span" variant="outlined" color="error" onClick={() => deleteList(list.id)}>
             Delete
           </Button>
         </Stack>
