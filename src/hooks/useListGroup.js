@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { createList } from "../firebaseFunctions/firestoreDbOperations";
 import { auth } from "../firebase"; 
+import { getUserLists } from '../firebaseFunctions/firestoreDbOperations';
 
-function useListGroup() {
+function useListGroup(user) {
   const [listGroup, setListGroup] = useState([]);
   const [hasLoaded, setHasLoaded] = useState(false);
 
@@ -15,15 +16,37 @@ function useListGroup() {
   }, []);
 
   useEffect(() => {
-    if (hasLoaded) {
+    if (hasLoaded && !auth.currentUser) {
       localStorage.setItem('listGroupData', JSON.stringify(listGroup));
     }
   }, [listGroup, hasLoaded]);
 
-
-
+  useEffect(() => {
+    const loadLists = async () => {
+      if (user) {
+        try {
+          const userLists = await getUserLists(user.uid);
+          setListGroup(userLists);
+          localStorage.removeItem("listGroupData");
+        } catch (err) {
+          console.error("Error loading user lists:", err);
+        }
+      }
+    };
+  
+    loadLists();
+  }, [user]);
+  
+  
   async function addNewListGroup(task) {
-    setListGroup(prev => [...prev, task]);
+
+    const newList = {
+      ...task,
+      tasks: task.tasks || [],
+      completed: task.completed || false
+    };
+  
+    setListGroup(prev => [...prev, newList]);
   
     const currentUser = auth.currentUser;
     if (currentUser) {
@@ -124,6 +147,10 @@ function useListGroup() {
     );
   }
 
+  function clearAllLists() {
+    setListGroup([]);
+  }
+  
   return {
     listGroup,
     setListGroup,
@@ -132,7 +159,8 @@ function useListGroup() {
     deleteTaskFromList,
     toggleTaskCompleteInList,
     toggleListComplete,
-    deleteList
+    deleteList,
+    clearAllLists
   };
 
 }

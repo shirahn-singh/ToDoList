@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import UserLists from './UserLists';
 import Feed from './Feed';
 import useListGroup from '../hooks/useListGroup';
@@ -8,6 +8,7 @@ import UserAccountInfo from './UserAccountInfo';
 import useFirebaseAuth from '../hooks/useFirebaseAuth';
 
 function App() {
+  const { user, login, logout, signUp, loginWithEmail } = useFirebaseAuth();
   const {
     listGroup,
     addNewListGroup,
@@ -15,10 +16,9 @@ function App() {
     deleteTaskFromList,
     toggleTaskCompleteInList,
     toggleListComplete,
-    deleteList
-  } = useListGroup();
-
-  const { user, login, logout, signUp, loginWithEmail } = useFirebaseAuth();
+    deleteList,
+    clearAllLists
+  } = useListGroup(user);
 
   const [tabIndex, setTabIndex] = useState(0);
 
@@ -41,12 +41,18 @@ function App() {
     addNewListGroup(newList);
   }
 
+  const handleLogout = async () => {
+    await logout();
+    clearAllLists(); 
+    localStorage.removeItem("listGroupData"); 
+  };
+
   return (
     <>
       <UserAccountInfo
         user={user}
         login={login}
-        logout={logout}
+        logout={handleLogout}
         signUp={signUp}
         loginWithEmail={loginWithEmail}
       />

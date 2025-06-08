@@ -3,6 +3,9 @@ import {
   collection,
   addDoc,
   serverTimestamp,
+  getDocs,
+  query,
+  where
 } from "firebase/firestore";
 
 export const createList = async (userId, text) => {
@@ -15,3 +18,15 @@ export const createList = async (userId, text) => {
   return ref.id;
 };
 
+export const getUserLists = async (userId) => {
+    const q = query(collection(db, "lists"), where("userId", "==", userId));
+    const snapshot = await getDocs(q);
+  
+    return snapshot.docs.map(doc => ({
+      id: doc.id,
+      text: doc.data().title,   
+      tasks: [],              
+      completed: false,      
+      ...doc.data()
+    }));
+  };
