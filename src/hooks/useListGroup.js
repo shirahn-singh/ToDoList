@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { createList } from "../firebaseFunctions/firestoreDbOperations";
-import { auth } from "../firebase"; 
-import { getUserLists } from '../firebaseFunctions/firestoreDbOperations';
+import { createList, getUserLists, addTaskToListInFirestore } from "../firebaseFunctions/firestoreDbOperations";
+import { auth } from "../firebase";
 
 function useListGroup(user) {
   const [listGroup, setListGroup] = useState([]);
   const [hasLoaded, setHasLoaded] = useState(false);
 
+  //#region useEffects
   useEffect(() => {
     const stored = localStorage.getItem('listGroupData');
     if (stored) {
@@ -33,11 +33,11 @@ function useListGroup(user) {
         }
       }
     };
-  
+
     loadLists();
   }, [user]);
-  
-  
+  //#endregion
+
   async function addNewListGroup(task) {
 
     const newList = {
@@ -45,9 +45,9 @@ function useListGroup(user) {
       tasks: task.tasks || [],
       completed: task.completed || false
     };
-  
+
     setListGroup(prev => [...prev, newList]);
-  
+
     const currentUser = auth.currentUser;
     if (currentUser) {
       try {
@@ -66,6 +66,15 @@ function useListGroup(user) {
           : list
       )
     );
+    
+    const currentUser = auth.currentUser;
+    if (currentUser) {
+      try {
+        addTaskToListInFirestore(listId, task);
+      } catch (err) {
+        console.error("Error adding task to Firestore:", err);
+      }
+    }
   }
 
   function deleteTaskFromList(listId, taskId) {
@@ -150,7 +159,7 @@ function useListGroup(user) {
   function clearAllLists() {
     setListGroup([]);
   }
-  
+
   return {
     listGroup,
     setListGroup,
