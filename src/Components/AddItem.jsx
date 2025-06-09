@@ -7,7 +7,7 @@ function AddItem({updateTaskList, listName}) {
     function addToList() {
         if (task.length > 0) {
             updateTaskList({
-                id: Date.now(),
+                id: Date.now().toString(),
                 text: task,
                 completed: false
               });

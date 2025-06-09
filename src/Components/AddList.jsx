@@ -26,7 +26,7 @@ function AddList({ addNewListGroup, generateListFromTitle }) {
 
   function generateStandardList() {
     addNewListGroup({
-      id: Date.now(),
+      id: Date.now().toString(),
       text: list,
       completed: false,
       tasks: [],
