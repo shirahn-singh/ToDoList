@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { createList, getUserLists, addTaskToListInFirestore } from "../firebaseFunctions/firestoreDbOperations";
+import { createList, getUserLists, addTaskToListInFirestore, deleteTaskFromListInFirestore, updateTaskInFirestore, deleteListWithTasks  } from "../firebaseFunctions/firestoreDbOperations";
 import { auth } from "../firebase";
 
 function useListGroup(user) {
@@ -66,7 +66,7 @@ function useListGroup(user) {
           : list
       )
     );
-    
+
     const currentUser = auth.currentUser;
     if (currentUser) {
       try {
@@ -85,10 +85,19 @@ function useListGroup(user) {
           : list
       )
     );
+
+    const currentUser = auth.currentUser;
+    if (currentUser) {
+      try {
+        deleteTaskFromListInFirestore(listId, taskId);
+      } catch (err) {
+        console.error("Error deleting task from Firestore:", err);
+      }
+    }
   }
 
-
   function toggleTaskCompleteInList(listId, taskId) {
+    const currentUser = auth.currentUser;
     setListGroup(prev =>
       prev.map(list =>
         list.id === listId
@@ -105,6 +114,16 @@ function useListGroup(user) {
     );
 
     moveToEnd(listId, taskId);
+    if (currentUser) {
+      const list = listGroup.find(l => l.id === listId);
+      const task = list?.tasks.find(t => t.id === taskId);
+      if (task) {
+        updateTaskInFirestore(listId, {
+          ...task,
+          completed: !task.completed
+        });
+      }
+    }
   }
 
   function moveToEnd(listId, taskId) {
@@ -135,9 +154,12 @@ function useListGroup(user) {
     )
   }
 
-
-
   function toggleListComplete(listId) {
+    const currentUser = auth.currentUser;
+
+    const targetList = listGroup.find(list => list.id === listId);
+    const newCompletedState = !targetList?.completed;
+
     setListGroup((prev) => prev.map(listItem =>
       listId == listItem.id ? {
         ...listItem,
@@ -148,12 +170,26 @@ function useListGroup(user) {
         }))
       } : listItem
     ));
+
+    if (currentUser && targetList) {
+      targetList.tasks.forEach(task =>
+        updateTaskInFirestore(listId, {
+          ...task,
+          completed: newCompletedState
+        })
+      );
+    }
   }
 
   function deleteList(listId) {
     setListGroup(prev =>
       prev.filter(listItem => listItem.id !== listId)
     );
+
+    const currentUser = auth.currentUser;
+    if (currentUser) {
+      deleteListWithTasks(listId);
+    }
   }
 
   function clearAllLists() {
