@@ -6,6 +6,7 @@ import useListGroup from '../hooks/useListGroup';
 import { Box, Tab, Tabs, Container, Typography } from '@mui/material';
 import UserAccountInfo from './UserAccountInfo';
 import useFirebaseAuth from '../hooks/useFirebaseAuth';
+import PomodoroTimer from './Pomodoro Timer/PomodoroTimer';
 
 function App() {
   const { user, login, logout, signUp, loginWithEmail } = useFirebaseAuth();
@@ -56,6 +57,7 @@ function App() {
         signUp={signUp}
         loginWithEmail={loginWithEmail}
       />
+      <PomodoroTimer/>
       <Container maxWidth="xl">
         <Typography variant="h4" gutterBottom>
           Hello, I am a to-do list. Add stuff to me now
