@@ -49,7 +49,9 @@ function App() {
   };
 
   return (
-    <>
+    <Box sx={{ display: "flex", px: 2, mt: 2, position: "relative" }}>
+
+    <Box sx={{ position: "absolute", top: 0, right: 0, zIndex: 2 }}>
       <UserAccountInfo
         user={user}
         login={login}
@@ -57,41 +59,41 @@ function App() {
         signUp={signUp}
         loginWithEmail={loginWithEmail}
       />
-      <PomodoroTimer/>
-      <Container maxWidth="xl">
-        <Typography variant="h4" gutterBottom>
-          Hello, I am a to-do list. Add stuff to me now
+    </Box>
+  
+    <PomodoroTimer />
+  
+    <Container maxWidth="xl" sx={{ flexGrow: 1 }}>
+      <Box sx={{ borderBottom: 1, borderColor: 'divider', mb: 2 }}>
+        <Tabs value={tabIndex} onChange={(e, newValue) => setTabIndex(newValue)}>
+          <Tab label="My Lists" />
+          {user && <Tab label="Feed" />}
+        </Tabs>
+      </Box>
+  
+      {tabIndex === 0 && (
+        <UserLists
+          listGroup={listGroup}
+          addNewListGroup={addNewListGroup}
+          generateListFromTitle={generateListFromTitle}
+          addTaskToList={addTaskToList}
+          deleteTask={deleteTaskFromList}
+          toggleTaskComplete={toggleTaskCompleteInList}
+          toggleListComplete={toggleListComplete}
+          deleteList={deleteList}
+        />
+      )}
+  
+      {tabIndex === 1 && user && <Feed />}
+  
+      {tabIndex === 1 && !user && (
+        <Typography variant="body1" color="text.secondary">
+          Please log in to view the feed.
         </Typography>
-
-        <Box sx={{ borderBottom: 1, borderColor: 'divider', mb: 2 }}>
-          <Tabs value={tabIndex} onChange={(e, newValue) => setTabIndex(newValue)}>
-            <Tab label="My Lists" />
-            {user && <Tab label="Feed" />}
-          </Tabs>
-        </Box>
-
-        {tabIndex === 0 && (
-          <UserLists
-            listGroup={listGroup}
-            addNewListGroup={addNewListGroup}
-            generateListFromTitle={generateListFromTitle}
-            addTaskToList={addTaskToList}
-            deleteTask={deleteTaskFromList}
-            toggleTaskComplete={toggleTaskCompleteInList}
-            toggleListComplete={toggleListComplete}
-            deleteList={deleteList}
-          />
-        )}
-
-        {tabIndex === 1 && user && <Feed />}
-
-        {tabIndex === 1 && !user && (
-          <Typography variant="body1" color="text.secondary">
-            Please log in to view the feed.
-          </Typography>
-        )}
-      </Container>
-    </>
+      )}
+    </Container>
+  </Box>
+  
   );
 }
 
