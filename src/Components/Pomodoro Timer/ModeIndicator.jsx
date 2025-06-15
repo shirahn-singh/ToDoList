@@ -1,8 +1,9 @@
-import React from "react";
+import React from 'react';
 
-
-function ModeIndicator(){
-return <div>MODE INDICATOR</div>;
+function ModeIndicator({ mode }) {
+    return (
+        <h2>{mode === 'work' ? 'Work Time' : 'Break Time'}</h2>
+    );
 }
 
 export default ModeIndicator;
